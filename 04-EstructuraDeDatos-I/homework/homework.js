@@ -1,5 +1,7 @@
 'use strict'
 
+const { size } = require("@11ty/eleventy/src/TemplateCache");
+
 /*
 Definir las funciones recursivas nFactorial y nFibonacci.
 
@@ -14,10 +16,26 @@ Secuencia:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Como ejercicio adicional y completamente opcional, al terminar de resolver este problema pueden intentar definir funciones que logren los mismos resultados pero de manera iterativa.
 */
 
-function nFactorial(n) {
+// n! = n*(n-1)! >>> llegar a uno
+//? el factorial tiene que multiplicar todos los numeros anteriores hasta llegar a uno
+function nFactorial(num) {
+  if (num === 1 || num === 0) return 1;
+  if (num < 0) return 0
+  return num * nFactorial (num-1)
 }
 
 function nFibonacci(n) {
+
+  // nFibonacci(n) == nFibonacci (n-1) + nFibonacci (n-2) o sea cualquier numero de la secuencia
+  // fibonacci es igual a la suma de los dos anteriores por eso n-1 + n-2 ya que n seria por ejemplo un numero cualquiera 
+  //nFibonacci(0) == 0
+  //nFibonacci(1) == 1
+
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  return nFibonacci(n-1) + nFibonacci(n-2)
+
 }
 
 /*
@@ -30,8 +48,25 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
+  this.array = [];
+  
+  Queue.prototype.enqueue = function(elem) {
+    this.array.push(elem)
+  }
 
+
+  Queue.prototype.dequeue = function(elem){
+    
+   return this.array.shift(elem)
+  }
+  
+
+
+  Queue.prototype.size = function(){
+    return this.array.length;
+  }
 }
+
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
